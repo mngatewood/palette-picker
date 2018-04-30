@@ -16,17 +16,29 @@
       <div id="header-palette-five" class="header-palette-box">Five</div>
     </section>
     <button id="header-button-refresh">Generate New Palette</button>
-    <section id="header-save-palette-container">
-      <form id="header-save-palette-form">
+  </header>
+  <main>
+    <section id="main-save-palette-container">
+      <form id="main-save-palette-form">
         <select id="save-palette-project">
           <option>Project 1</option>
           <option>Project 2</option>
         </select>
         <input id="save-palette-name" />
-        <button is="save-palette-submit">Save Palette</button>
+        <button id="save-palette-submit">Save Palette</button>
       </form>
     </section>
-  </header>
+    <section id="main-create-project-container">
+      <form id="main-create-project-form">
+        <input id="create-project-name" />
+        <button id="create-project-submit">Save Palette</button>
+      </form>
+    </section>
+    <section id="main-existing-projects-container">
+      <p>There will be projects and palettes here!</p>
+    </section>
+
+  </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
   <script src="js/script.js" type="text/javascript"></script>
