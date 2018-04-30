@@ -8,7 +8,24 @@
 <body>
   <header>
     <h1>Palette-Picker</h1>
-    <button id="test">Test</button>
+    <section id="header-palette-container">
+      <div id="header-palette-one" class="header-palette-box">One</div>
+      <div id="header-palette-two" class="header-palette-box">Two</div>
+      <div id="header-palette-three" class="header-palette-box">Three</div>
+      <div id="header-palette-four" class="header-palette-box">Four</div>
+      <div id="header-palette-five" class="header-palette-box">Five</div>
+    </section>
+    <button id="header-button-refresh">Generate New Palette</button>
+    <section id="header-save-palette-container">
+      <form id="header-save-palette-form">
+        <select id="save-palette-project">
+          <option>Project 1</option>
+          <option>Project 2</option>
+        </select>
+        <input id="save-palette-name" />
+        <button is="save-palette-submit">Save Palette</button>
+      </form>
+    </section>
   </header>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
