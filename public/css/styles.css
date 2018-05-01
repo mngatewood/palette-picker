@@ -10,7 +10,7 @@
 
 @font-face {
     font-family: Digital;
-    src: url(digital-heavy.ttf);
+    src: url(timebomb.ttf);
     font-weight: bolder;
 }
 
@@ -54,12 +54,14 @@ h1 {
 
 #header-palette-container {
   border: 20px solid #C0C0C0;
+  border-bottom: 60px;
   border-style: inset;
 }
 
 #header-palette-container-main,
 #header-palette-container-pre,
-#header-palette-container-post {
+#header-palette-container-post,
+#header-palette-container-locks {
   position: relative;
   display: flex;
   flex-flow: row nowrap;
@@ -69,7 +71,8 @@ h1 {
 
 .header-palette-box,
 .header-palette-box-pre,
-.header-palette-box-post {
+.header-palette-box-post,
+.header-palette-box-lock {
   flex: 1;
   height: 100px;
   /* margin: 0 5px; */
@@ -78,15 +81,19 @@ h1 {
 }
 
 .header-palette-box {
-  color: white;
   text-align: center;
-  font-size: 36px;
-  font-family: Arial, Helvetica, sans-serif;
   padding-top: 75px;
-  text-shadow: 1px 1px #303030;
   box-shadow: 
     inset 0px 5px 10px -2px #FFF,
     inset 0px -5px 10px -2px #FFF;
+}
+
+.header-palette-box span {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 36px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 1px 1px #303030;
+  text-transform: uppercase;
 }
 
 .header-palette-box-pre {
@@ -96,9 +103,14 @@ h1 {
 }
 
 .header-palette-box-post {
-  height: 50px;
+  height: 36px;
   box-shadow: 
     inset 0px -20px 40px -10px #000;
+}
+
+.header-palette-box-lock {
+  height: 0;
+  text-align: center;
 }
 
 main {
@@ -112,51 +124,94 @@ main {
   flex-direction: column;
   justify-content: left;
   padding: 15px;
-  height: 100px;
+  height: 110px;
   background-color: #C0C0C0;
   border-top: 1px solid #303030;
   background: linear-gradient(#C0C0C0, #303030);
 }
 
+#main-save-palette-container,
+#main-create-project-container {
+  width: 80%;
+}
+
 input {
-  width: 300px;
+  width: 30%;
   height: 24px;
-  margin: 0 25px 18px 0;
+  margin-right: 5%;
+  background-color: black;
+  color: red;
   font-family: 'Digital';
   font-size: 24px;
+  padding-top: 4px;
   padding-left: 8px;
   letter-spacing: 4px;
 }
+
+::placeholder {
+    color: red;
+    opacity: 1;
+}
 select {
-  width: 200px;
+  position: relative;
+  top: -3px;
+  width: 25%;
   height: 32px;
+  margin-right: 5%;
+  background-color: black;
+  color: red;
   font-family: 'Digital';
   font-size: 18px;
   letter-spacing: 4px;
 }
 
+hr {
+  color: white;
+}
+
 button {
   width: 80px;
   height: 80px;
-  background-color: red;
-  border: 5px solid #C0C0C0;
-  border-style: outset;
-  font-size: 16px;
-  font-weight: bolder;
+  box-shadow: 
+    0 0 4px 4px #448035 inset,
+    0 0 4px 4px black;
+  border-radius: 10px;
+  background: linear-gradient(#90DF80 50%, #489D2E, #90DF80);
+  font-family: 'Kanit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
   margin: 10px 20px;
-  color: white;
-  text-shadow: 1px 1px black;
+  color: black;
+  /* text-shadow: 1px 1px black; */
   letter-spacing: 1px;
+}
+
+button:focus {
+  outline:0;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+button.selected {
+  box-shadow: 
+    0 0 4px 4px #DA8381 inset,
+    0 0 4px 4px black;
+  background: linear-gradient(#FFB6C1 50%, #DA8381, #FFB6C1);
 }
 
 #main-button-refresh {
   position: absolute;
   right: 25px;
+  margin-top: 22px;
+  font-size: 24px;
+  font-weight: 900;
 }
 
 #save-palette-submit,
 #create-project-submit {
-  width: 200px;
+  width: 25%;
   height: auto;
   background-color: lightgreen;
   color: #303030;
@@ -165,11 +220,21 @@ button {
 
 #create-project-submit {
   position: relative;
-  left: 204px;
+  left: 30.5%;
+}
+
+.lock-button {
+  width: 60%;
+  height: 40px;
+  box-shadow: 
+    0 0 4px 4px #A52218 inset,
+    0 0 4px 4px black;
+  background: linear-gradient(#DA8381 50%, #A52218, #DA8381);
+
 }
 
 #main-dashboard-bottom {
-  height: 50px;
+  height: 20px;
   background: linear-gradient(#303030, #C0C0C0);
 }
 
@@ -177,11 +242,13 @@ footer {
   flex: 1;
   background: linear-gradient(#C0C0C0, #303030);
   color: white;
-  min-height: 100px;
-  padding: 15px;
+  min-height: 90px;
+  padding: 5px 15px;
 }
 
 #main-existing-projects-container {
+  position: relative;
+  top: -5px;
   padding: 10px;
   height: 80%;
   border: 5px solid #F5F5F5;
