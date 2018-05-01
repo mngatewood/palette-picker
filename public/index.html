@@ -7,38 +7,59 @@
 
 <body>
   <header>
-    <h1>Palette-Picker</h1>
-    <section id="header-palette-container">
-      <div id="header-palette-one" class="header-palette-box">One</div>
-      <div id="header-palette-two" class="header-palette-box">Two</div>
-      <div id="header-palette-three" class="header-palette-box">Three</div>
-      <div id="header-palette-four" class="header-palette-box">Four</div>
-      <div id="header-palette-five" class="header-palette-box">Five</div>
-    </section>
-    <button id="header-button-refresh">Generate New Palette</button>
+    <div id="header-title">
+      <h1>Palette <span id="picker">Picker</span></h1>
+    </div>
   </header>
   <main>
-    <section id="main-save-palette-container">
-      <form id="main-save-palette-form">
-        <select id="save-palette-project">
-          <option>Project 1</option>
-          <option>Project 2</option>
-        </select>
-        <input id="save-palette-name" />
-        <button id="save-palette-submit">Save Palette</button>
-      </form>
+    <section id="header-palette-container">
+      <section id="header-palette-container-pre">
+        <div id="header-palette-one-pre" class="header-palette-box-pre"></div>
+        <div id="header-palette-two-pre" class="header-palette-box-pre"></div>
+        <div id="header-palette-three-pre" class="header-palette-box-pre"></div>
+        <div id="header-palette-four-pre" class="header-palette-box-pre"></div>
+        <div id="header-palette-five-pre" class="header-palette-box-pre"></div>
+      </section>
+      <section id="header-palette-container-main">
+        <div id="header-palette-one" class="header-palette-box">#FFFFFF</div>
+        <div id="header-palette-two" class="header-palette-box">#FFFFFF</div>
+        <div id="header-palette-three" class="header-palette-box">#FFFFFF</div>
+        <div id="header-palette-four" class="header-palette-box">#FFFFFF</div>
+        <div id="header-palette-five" class="header-palette-box">#FFFFFF</div>
+      </section>
+      <section id="header-palette-container-post">
+        <div id="header-palette-one-post" class="header-palette-box-post"></div>
+        <div id="header-palette-two-post" class="header-palette-box-post"></div>
+        <div id="header-palette-three-post" class="header-palette-box-post"></div>
+        <div id="header-palette-four-post" class="header-palette-box-post"></div>
+        <div id="header-palette-five-post" class="header-palette-box-post"></div>
+      </section>
     </section>
-    <section id="main-create-project-container">
-      <form id="main-create-project-form">
-        <input id="create-project-name" />
-        <button id="create-project-submit">Save Palette</button>
-      </form>
+    <section id="main-dashboard">
+      <button id="main-button-refresh">SPIN REELS</button>
+      <section id="main-save-palette-container">
+        <form id="main-save-palette-form">
+          <input id="save-palette-name" placeholder="ENTER PALETTE NAME"/>
+          <select id="save-palette-project">
+            <option>SELECT A PROJECT</option>
+            <option>PROJECT 1</option>
+            <option>PROJECT 2</option>
+          </select>
+          <button id="save-palette-submit">SAVE PALETTE</button>
+        </form>
+      </section>
+      <section id="main-create-project-container">
+        <form id="main-create-project-form">
+          <input id="create-project-name" placeholder="ENTER PROJECT NAME"/>
+          <button id="create-project-submit">CREATE PROJECT</button>
+        </form>
+      </section>
     </section>
-    <section id="main-existing-projects-container">
-      <p>There will be projects and palettes here!</p>
-    </section>
-
   </main>
+    <footer id="main-existing-projects-container">
+      There will be projects and palettes here!
+    </footer>
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
   <script src="js/script.js" type="text/javascript"></script>

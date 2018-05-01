@@ -1,17 +1,172 @@
-h1 {
-  color: blue;
+@font-face {
+    font-family: Budmo;
+    src: url(budmojiggler.ttf);
 }
 
-.header-palette-container {
+@font-face {
+    font-family: Fabulous;
+    src: url(fabulous.ttf);
+}
+
+@font-face {
+    font-family: Digital;
+    src: url(digital-heavy.ttf);
+    font-weight: bolder;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+header {
+  background-color: #C0C0C0;
+}
+
+#header-title {
+  background-image: url("background.jpg");
+  background-size: 100vw;
+  background-color: black;
+  padding: 25px;
+}
+
+h1 {
+  font-family: 'Fabulous';
+  color: #CA32A3;
+  font-size: 72px;
+  text-align: center;
+  text-shadow: 1px 1px #9a44ba;
+  margin: 0px 20px -5px 20px;
+}
+
+#picker {
+  font-family: 'Budmo';
+  font-size: 65px;
+  color: #9a44ba;
+  letter-spacing: 5px;
+  text-shadow: none;
+}
+
+#header-palette-container {
+  border: 20px solid #C0C0C0;
+  border-style: inset;
+}
+
+#header-palette-container-main,
+#header-palette-container-pre,
+#header-palette-container-post {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  align-content: space-around;
+  /* width: 100%; */
+}
+
+.header-palette-box,
+.header-palette-box-pre,
+.header-palette-box-post {
+  flex: 1;
+  height: 100px;
+  /* margin: 0 5px; */
+  border: 5px solid black;
+  border-style: none solid;
 }
 
 .header-palette-box {
+  color: white;
+  text-align: center;
+  font-size: 36px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 75px;
+  text-shadow: 1px 1px #303030;
+}
+
+.header-palette-box-pre {
+  height: 36px;
+  box-shadow: 
+    inset 0px 20px 40px -10px #000;
+}
+
+.header-palette-box-post {
+  height: 50px;
+  box-shadow: 
+    inset 0px -20px 40px -10px #000;
+}
+
+main {
+  /* flex: 0 1 auto; */
+  display: flex;
+  flex-direction: column;
+}
+
+#main-dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 15px;
+  height: 100px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #303030;
+  background: linear-gradient(#C0C0C0, #303030);
+}
+
+input {
+  width: 300px;
+  height: 24px;
+  margin: 0 25px 18px 0;
+  font-family: 'Digital';
+  font-size: 24px;
+  padding-left: 8px;
+  letter-spacing: 4px;
+}
+select {
+  width: 200px;
+  height: 32px;
+  font-family: 'Digital';
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+
+button {
+  width: 80px;
+  height: 80px;
+  background-color: red;
+  border: 5px solid #C0C0C0;
+  border-style: outset;
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 10px 20px;
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
+#main-button-refresh {
+  position: absolute;
+  right: 25px;
+}
+
+#save-palette-submit,
+#create-project-submit {
+  width: 200px;
+  height: auto;
+  background-color: lightgreen;
+  color: #303030;
+  text-shadow: none;
+}
+
+#create-project-submit {
+  position: relative;
+  left: 204px;
+}
+
+#main-existing-projects-container {
   flex: 1;
-  width: 15%;
-  height: 300px;
-  border: 1px solid black;
-  background-color: aqua;
+  background-color: black;
+  color: white;
+  min-height: 100px;
 }
