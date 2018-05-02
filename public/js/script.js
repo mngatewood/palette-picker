@@ -44,18 +44,17 @@ fetchProjects = async () => {
 const createProjectDiv = (projects) => {
   $.each(projects, (index, project) => {
     const newArticle = $(`
-      <article>
-        <h2 id="${project.id}">${project.id}</h2>
+      <article id="${project.id}">
+        <h2 >${project.id}</h2>
       </article>
     `);
     console.log(project.id);
-    $('#main-existing-projects-container').append(newArticle.clone());
+    $('#main-existing-projects-container').append(newArticle);
 
     $.each(project.palettes, (index, palette) => {
       console.log(palette.colorOne)
       const paletteSelector = project.id
       const newPalette = $(`
-        <div id="${palette.id}>
           <h3>${palette.id}</h3>
             <ul>
               <li>${palette.colorOne}</li>
@@ -64,10 +63,9 @@ const createProjectDiv = (projects) => {
               <li>${palette.colorFour}</li>
               <li>${palette.colorFive}</li>
             </ul>
-        </div>
       `)
 
-      $("#" + project.id).append("<p>Test</p>");
+      $("#" + paletteSelector).append(newPalette);
     })
 
 
