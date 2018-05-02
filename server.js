@@ -14,6 +14,15 @@ app.get('/api/v1/projects', (request, response) => {
   }
 });
 
+app.post('/api/v1/projects', (request, response) => {
+  const projects = app.locals.projects;
+  const {project} = request.body;
+
+  projects.push({project})
+  response.status(201).json({ project });
+});
+
+
 app.locals.projects = [
   {
     "id": "projectOne",
@@ -58,6 +67,8 @@ app.locals.projects = [
     ]
   }
 ]
+
+
 
 app.listen(3000, () => {
   console.log('Palette-picker running on localhost:3000');

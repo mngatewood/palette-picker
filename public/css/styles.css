@@ -74,7 +74,7 @@ h1 {
 .header-palette-box-post,
 .header-palette-box-lock {
   flex: 1;
-  height: 100px;
+  height: 80px;
   /* margin: 0 5px; */
   border: 5px solid black;
   border-style: none solid;
@@ -82,7 +82,7 @@ h1 {
 
 .header-palette-box {
   text-align: center;
-  padding-top: 75px;
+  padding-top: 40px;
   box-shadow: 
     inset 0px 5px 10px -2px #FFF,
     inset 0px -5px 10px -2px #FFF;
@@ -142,7 +142,7 @@ input {
   background-color: black;
   color: red;
   font-family: 'Digital';
-  font-size: 24px;
+  font-size: 22px;
   padding-top: 4px;
   padding-left: 8px;
   letter-spacing: 4px;
@@ -247,6 +247,7 @@ footer {
 }
 
 #main-existing-projects-container {
+  display: flex;
   position: relative;
   top: -5px;
   padding: 10px;
@@ -254,5 +255,47 @@ footer {
   border: 5px solid #F5F5F5;
   border-radius: 10px;
   border-style: groove;
-  background-color: #303030;
+  background-color: #C0C0C0;
+  overflow: scroll;
+  text-transform: uppercase;
+}
+
+article {
+  margin-right: 2%;
+}
+
+article h2 {
+  margin: 0px 0 5px 0;
+  color: #000000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.project-palette-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.project-palette-container h3 {
+  width: 120px;
+  margin: 2px 10px;
+  color: #303030;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.project-color-box {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  border: 1px solid #C0C0C0;
+}
+
+article img {
+  width: 20px;
+  height: 20px;
+  margin: 3px;
 }
