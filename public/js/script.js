@@ -1,6 +1,7 @@
-const onLoad = () => {
+const onLoad = async () => {
   refreshPalette();
-  fetchProjects();
+  const projects = await fetchProjects();
+  await loadProjects(projects);
 }
 
 const randomNumber = () => {
@@ -39,8 +40,33 @@ fetchProjects = async () => {
   }
 }
 
-const displayProjects = () => {
-  
+const loadProjects = (projects) => {
+  $.each(projects, (index, project) => {
+    const newArticle = $(`
+      <article id="${project.id}">
+        <h2 >${project.id}</h2>
+      </article>
+    `);
+    console.log(project.id);
+    $('#main-existing-projects-container').append(newArticle);
+
+    $.each(project.palettes, (index, palette) => {
+      console.log(palette.colorOne)
+      const paletteSelector = project.id
+      const newPalette = $(`
+        <div class="project-palette-container">
+          <h3>${palette.id}</h3>
+          <div class="project-color-box" style="background-color:${palette.colorOne}"></div>
+          <div class="project-color-box" style="background-color:${palette.colorTwo}"></div>
+          <div class="project-color-box" style="background-color:${palette.colorThree}"></div>
+          <div class="project-color-box" style="background-color:${palette.colorFour}"></div>
+          <div class="project-color-box" style="background-color:${palette.colorFive}"></div>
+          <img src="/css/delete-button.svg" />
+        </div>
+      `)
+      $("#" + paletteSelector).append(newPalette);
+    })
+  });
 }
 
 $('#main-button-refresh').click( () => {
