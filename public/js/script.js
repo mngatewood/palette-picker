@@ -1,3 +1,8 @@
+const onLoad = () => {
+  refreshPalette();
+  fetchProjects();
+}
+
 const randomNumber = () => {
   return Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -22,7 +27,21 @@ const refreshPalette = () => {
   $('#header-palette-five span').text(colorFive);
 }
 
-refreshPalette();
+fetchProjects = async () => {
+  url = 'http://localhost:3000/api/v1/projects/';
+  try {
+    const response = await fetch(url);
+    const projects = await response.json();
+    console.log(projects);
+    return projects;
+  } catch (error) {
+    throw Error("Error retrieving recipes: " + error.message);
+  }
+}
+
+const displayProjects = () => {
+  
+}
 
 $('#main-button-refresh').click( () => {
   refreshPalette();
