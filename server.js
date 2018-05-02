@@ -16,44 +16,44 @@ app.get('/api/v1/projects', (request, response) => {
 
 app.locals.projects = [
   {
-    "id": "project-1",
+    "id": "projectOne",
     "palettes": [
       {
-        "id": "palette-1",
-        "color-1": "#111111",
-        "color-2": "#222222",
-        "color-3": "#333333",
-        "color-4": "#444444",
-        "color-5": "#555555"
+        "id": "paletteOne",
+        "colorOne": "#111111",
+        "colorTwo": "#222222",
+        "colorThree": "#333333",
+        "colorFour": "#444444",
+        "colorFive": "#555555"
       },
       {
-        "id": "palette-2",
-        "color-1": "#666666",
-        "color-2": "#777777",
-        "color-3": "#888888",
-        "color-4": "#999999",
-        "color-5": "#000000"
+        "id": "paletteTwo",
+        "colorOne": "#666666",
+        "colorTwo": "#777777",
+        "colorThree": "#888888",
+        "colorFour": "#999999",
+        "colorFive": "#000000"
       },
     ]
   },
   {
-    "id": "project-2",
+    "id": "projectTwo",
     "palettes": [
       {
-        "id": "palette-3",
-        "color-1": "#121212",
-        "color-2": "#232323",
-        "color-3": "#343434",
-        "color-4": "#454545",
-        "color-5": "#565656"
+        "id": "paletteThree",
+        "colorOne": "#121212",
+        "colorTwo": "#232323",
+        "colorThree": "#343434",
+        "colorFour": "#454545",
+        "colorFive": "#565656"
       },
       {
-        "id": "palette-4",
-        "color-1": "#676767",
-        "color-2": "#787878",
-        "color-3": "#898989",
-        "color-4": "#909090",
-        "color-5": "#010101"
+        "id": "paletteFour",
+        "colorOne": "#676767",
+        "colorTwo": "#787878",
+        "colorThree": "#898989",
+        "colorFour": "#909090",
+        "colorFive": "#010101"
       },
     ]
   }

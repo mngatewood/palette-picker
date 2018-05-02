@@ -1,6 +1,8 @@
-const onLoad = () => {
+const onLoad = async () => {
   refreshPalette();
-  fetchProjects();
+  const projects = await fetchProjects();
+  console.log(projects)
+  await createProjectDiv(projects);
 }
 
 const randomNumber = () => {
@@ -39,8 +41,37 @@ fetchProjects = async () => {
   }
 }
 
-const displayProjects = () => {
-  
+const createProjectDiv = (projects) => {
+  $.each(projects, (index, project) => {
+    const newArticle = $(`
+      <article>
+        <h2 id="${project.id}">${project.id}</h2>
+      </article>
+    `);
+    console.log(project.id);
+    $('#main-existing-projects-container').append(newArticle.clone());
+
+    $.each(project.palettes, (index, palette) => {
+      console.log(palette.colorOne)
+      const paletteSelector = project.id
+      const newPalette = $(`
+        <div id="${palette.id}>
+          <h3>${palette.id}</h3>
+            <ul>
+              <li>${palette.colorOne}</li>
+              <li>${palette.colorTwo}</li>
+              <li>${palette.colorThree}</li>
+              <li>${palette.colorFour}</li>
+              <li>${palette.colorFive}</li>
+            </ul>
+        </div>
+      `)
+
+      $("#" + project.id).append("<p>Test</p>");
+    })
+
+
+  });
 }
 
 $('#main-button-refresh').click( () => {
