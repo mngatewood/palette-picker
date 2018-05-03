@@ -2,6 +2,7 @@ const onLoad = async () => {
   refreshPalette();
   const projects = await fetchProjects();
   await renderProjects(projects);
+  await getProjectOptions(projects);
   const palettes = await fetchPalettes();
   await renderPalettes(palettes);
 }
@@ -70,6 +71,15 @@ const renderPalettes = (palettes) => {
   })
 };
 
+const getProjectOptions = (projects) => {
+  $.each(projects, (index, project) => {
+    const option = $(`
+    <option id="${project.id}">${project.name}</option>
+    `)
+    $('#save-palette-project').append(option);
+  })
+}
+
 const getPalette = (event) => {
   event.preventDefault();
   const name = $('#save-palette-name').val();
@@ -107,6 +117,11 @@ $('#save-palette-submit').click((event) => {
   const palette = getPalette(event);
   console.log(palette);
 });
+
+$('#create-project-submit').click((event) => {
+  event.preventDefault();
+  getProjectOptions();
+})
 
 $('body').on('click', '.delete-palette-button', (event) => {
   deletePalette(event.target.id);
