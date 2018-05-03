@@ -2,6 +2,7 @@ const onLoad = async () => {
   refreshPalette();
   const projects = await fetchProjects();
   await renderProjects(projects);
+  await getProjectOptions(projects);
   const palettes = await fetchPalettes();
   await renderPalettes(palettes);
 }
@@ -70,6 +71,27 @@ const renderPalettes = (palettes) => {
   })
 };
 
+const getProjectOptions = (projects) => {
+  $.each(projects, (index, project) => {
+    const option = $(`
+    <option id="${project.id}">${project.name}</option>
+    `)
+    $('#save-palette-project').append(option);
+  })
+}
+
+const getPalette = (event) => {
+  event.preventDefault();
+  const name = $('#save-palette-name').val();
+  const color_1 = $('#header-palette-1 span').text();
+  const color_2 = $('#header-palette-2 span').text();
+  const color_3 = $('#header-palette-3 span').text();
+  const color_4 = $('#header-palette-4 span').text();
+  const color_5 = $('#header-palette-5 span').text();
+  const project_id = 1;
+  return { name, color_1, color_2, color_3, color_4, color_5, project_id };
+}
+
 const deletePalette = async (id) => {
   const initialFetch = await fetch(`/api/v1/palettes/${id}`, {
     method: 'DELETE'
@@ -87,9 +109,19 @@ $('#main-button-refresh').click( () => {
   refreshPalette();
 });
 
-$('.lock-button').click( (event) => {
+$('.lock-button').click((event) => {
   toggleLock();
 });
+
+$('#save-palette-submit').click((event) => {
+  const palette = getPalette(event);
+  console.log(palette);
+});
+
+$('#create-project-submit').click((event) => {
+  event.preventDefault();
+  getProjectOptions();
+})
 
 $('body').on('click', '.delete-palette-button', (event) => {
   deletePalette(event.target.id);
