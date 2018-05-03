@@ -249,9 +249,10 @@ footer {
 
 #main-existing-projects-container {
   display: flex;
+  flex-wrap: wrap;
   position: relative;
   top: -5px;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   height: 80%;
   border: 5px solid #F5F5F5;
   border-radius: 10px;
@@ -262,11 +263,11 @@ footer {
 }
 
 article {
-  margin-right: 2%;
+  margin-right: 1%;
 }
 
 article h2 {
-  margin: 0px 0 5px 0;
+  margin: 10px 0 5px 0;
   color: #000000;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
