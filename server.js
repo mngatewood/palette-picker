@@ -3,12 +3,14 @@ const app = express();
 
 // console.log(process.env);
 
+// app.use(urlLogger, timeLogger);
+app.use(express.static('public'));
+
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile.js')[environment];
 const database = require('knex')(configuration);
 
-// app.use(urlLogger, timeLogger);
-app.use(express.static('public'));
+// PROJECTS
 
 // retrieve all projects from the database
 app.get('/api/v1/projects', (request, response) => {
@@ -54,70 +56,18 @@ app.post('/api/v1/projects', (request, response) => {
 
 });
 
-// app.get('/api/v1/projects', (request, response) => {
-//   const projects = app.locals.projects;
+// PALETTES
 
-//   if(projects) {
-//     response.status(200).json(projects);
-//   } else {
-//     response.status(404).send("Sorry can't find that!")
-//   }
-// });
-
-// app.post('/api/v1/projects', (request, response) => {
-//   const projects = app.locals.projects;
-//   const {project} = request.body;
-
-//   projects.push({project})
-//   response.status(201).json({ project });
-// });
-
-
-app.locals.projects = [
-  {
-    "id": "projectOne",
-    "palettes": [
-      {
-        "id": "paletteOne",
-        "colorOne": "#111111",
-        "colorTwo": "#222222",
-        "colorThree": "#333333",
-        "colorFour": "#444444",
-        "colorFive": "#555555"
-      },
-      {
-        "id": "paletteTwo",
-        "colorOne": "#666666",
-        "colorTwo": "#777777",
-        "colorThree": "#888888",
-        "colorFour": "#999999",
-        "colorFive": "#000000"
-      },
-    ]
-  },
-  {
-    "id": "projectTwo",
-    "palettes": [
-      {
-        "id": "paletteThree",
-        "colorOne": "#121212",
-        "colorTwo": "#232323",
-        "colorThree": "#343434",
-        "colorFour": "#454545",
-        "colorFive": "#565656"
-      },
-      {
-        "id": "paletteFour",
-        "colorOne": "#676767",
-        "colorTwo": "#787878",
-        "colorThree": "#898989",
-        "colorFour": "#909090",
-        "colorFive": "#010101"
-      },
-    ]
-  }
-]
-
+// retrieve all palettes from the database
+app.get('/api/v1/palettes', (request, response) => {
+  database('palettes').select()
+    .then((palettes) => {
+      response.status(200).json(palettes)
+    })
+    .catch((error) => {
+      response.status(500).json(error)
+    })
+})
 
 
 app.listen(3000, () => {
