@@ -69,6 +69,25 @@ app.get('/api/v1/palettes', (request, response) => {
     })
 })
 
+app.delete('/api/v1/palettes/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('palettes').where('id', id).del()
+    .then(result => {
+      if (result) {
+        return response
+          .status(200)
+          .json({ result: `Palette ${id} deleted successfully.` })
+      } else {
+        return response
+          .status(404)
+          .send({ error: `Palette ${id} not found.` })
+      }
+    })
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+})
 
 app.listen(3000, () => {
   console.log('Palette-picker running on localhost:3000');
