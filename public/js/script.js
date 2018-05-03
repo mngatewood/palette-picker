@@ -9,7 +9,8 @@ const renderProjectContainer = async () => {
   await renderProjects(projects);
   const palettes = await fetchPalettes();
   await renderPalettes(palettes);
-  await getProjectOptions(projects);
+  await emptyProjectOptions();
+  await addProjectOptions(projects);
 }
 
 const randomNumber = () => {
@@ -80,7 +81,12 @@ const emptyProjectContainer = () => {
   $('#main-existing-projects-container').empty();
 }
 
-const getProjectOptions = (projects) => {
+const emptyProjectOptions = () => {
+  const defaultOption = '<option>SELECT A PROJECT</option>'
+  $('#save-palette-project').empty().append(defaultOption);
+}
+
+const addProjectOptions = (projects) => {
   $.each(projects, (index, project) => {
     const option = $(`
     <option id="${project.id}">${project.name}</option>
@@ -89,8 +95,7 @@ const getProjectOptions = (projects) => {
   })
 }
 
-const getPalette = (event) => {
-  event.preventDefault();
+const createPaletteObject = () => {
   const name = $('#save-palette-name').val();
   const color_1 = $('#header-palette-1 span').text();
   const color_2 = $('#header-palette-2 span').text();
@@ -99,6 +104,21 @@ const getPalette = (event) => {
   const color_5 = $('#header-palette-5 span').text();
   const project_id = $('#save-palette-project').children(":selected").attr("id");
   return { name, color_1, color_2, color_3, color_4, color_5, project_id };
+}
+
+const postProject = async (name) => {
+  try {
+    url = 'http://localhost:3000/api/v1/projects/';
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {name} )
+    });
+  } catch (error) {
+    throw Error("Error saving project: " + error.message);
+  }
 }
 
 const postPalette = async (palette) => {
@@ -114,6 +134,10 @@ const postPalette = async (palette) => {
   } catch (error) {
     throw Error("Error saving palette: " + error.message);
   }
+}
+
+const clearInputFields = () => {
+  $('input').val('');
 }
 
 const deletePalette = async (id) => {
@@ -138,14 +162,19 @@ $('.lock-button').click((event) => {
 });
 
 $('#save-palette-submit').click( async (event) => {
-  const palette = getPalette(event);
+  event.preventDefault();
+  const palette = createPaletteObject();
   await postPalette(palette);
-  await renderProjectContainer();
+  renderProjectContainer();
+  clearInputFields();
 });
 
-$('#create-project-submit').click((event) => {
+$('#create-project-submit').click( async (event) => {
   event.preventDefault();
-  getProjectOptions();
+  const project = $('#create-project-name').val();
+  await postProject(project);
+  renderProjectContainer();
+  clearInputFields();
 })
 
 $('body').on('click', '.delete-palette-button', (event) => {
