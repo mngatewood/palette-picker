@@ -1,10 +1,15 @@
 const onLoad = async () => {
   refreshPalette();
+  await renderProjectContainer();
+}
+
+const renderProjectContainer = async () => {
+  await emptyProjectContainer();
   const projects = await fetchProjects();
   await renderProjects(projects);
-  await getProjectOptions(projects);
   const palettes = await fetchPalettes();
   await renderPalettes(palettes);
+  await getProjectOptions(projects);
 }
 
 const randomNumber = () => {
@@ -71,6 +76,10 @@ const renderPalettes = (palettes) => {
   })
 };
 
+const emptyProjectContainer = () => {
+  $('#main-existing-projects-container').empty();
+}
+
 const getProjectOptions = (projects) => {
   $.each(projects, (index, project) => {
     const option = $(`
@@ -88,8 +97,23 @@ const getPalette = (event) => {
   const color_3 = $('#header-palette-3 span').text();
   const color_4 = $('#header-palette-4 span').text();
   const color_5 = $('#header-palette-5 span').text();
-  const project_id = 1;
+  const project_id = $('#save-palette-project').children(":selected").attr("id");
   return { name, color_1, color_2, color_3, color_4, color_5, project_id };
+}
+
+const postPalette = async (palette) => {
+  try {
+    url = 'http://localhost:3000/api/v1/palettes/';
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(palette)
+    });
+  } catch (error) {
+    throw Error("Error saving palette: " + error.message);
+  }
 }
 
 const deletePalette = async (id) => {
@@ -113,9 +137,10 @@ $('.lock-button').click((event) => {
   toggleLock();
 });
 
-$('#save-palette-submit').click((event) => {
+$('#save-palette-submit').click( async (event) => {
   const palette = getPalette(event);
-  console.log(palette);
+  await postPalette(palette);
+  await renderProjectContainer();
 });
 
 $('#create-project-submit').click((event) => {
