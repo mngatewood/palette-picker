@@ -63,20 +63,34 @@ const renderPalettes = (palettes) => {
         <div class="project-color-box" style="background-color:${palette.color_3}"></div>
         <div class="project-color-box" style="background-color:${palette.color_4}"></div>
         <div class="project-color-box" style="background-color:${palette.color_5}"></div>
-        <img src="/css/delete-button.svg" />
+        <img src="/css/delete-button.svg" alt="delete button" id="${palette.id}" class="delete-palette-button" />
       </div>
     `)
     $("#project-" + palette.project_id).append(newPalette);
   })
 };
 
+const deletePalette = async (id) => {
+  const initialFetch = await fetch(`/api/v1/palettes/${id}`, {
+    method: 'DELETE'
+  })
+  $(`#palette-${id}`).remove();
+}
+
+const toggleLock = () => {
+  const button = event.target
+  $(button).parent().toggleClass('locked')
+  $(button).toggleClass('selected');
+}
 
 $('#main-button-refresh').click( () => {
   refreshPalette();
 });
 
 $('.lock-button').click( (event) => {
-  const button = event.target
-  $(button).parent().toggleClass('locked')
-  $(button).toggleClass('selected');
+  toggleLock();
 });
+
+$('body').on('click', '.delete-palette-button', (event) => {
+  deletePalette(event.target.id);
+})

@@ -295,7 +295,7 @@ article h2 {
   border: 1px solid #C0C0C0;
 }
 
-article img {
+.delete-palette-button {
   width: 20px;
   height: 20px;
   margin: 3px;
