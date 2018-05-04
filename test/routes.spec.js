@@ -42,9 +42,9 @@ describe('Projects', () => {
       })
   })
 
-  it.only('should get a single project', (done) => {
+  it('should get a single project', (done) => {
     chai.request(server)
-      .get('./api/v1/projects/1')
+      .get('/api/v1/projects/1')
       .end((error, response) => {
         response.should.be.json;
         response.should.have.status(200);
@@ -52,11 +52,10 @@ describe('Projects', () => {
         response.body.should.have.property('id');
         response.body.should.have.property('name');
         response.body.id.should.equal(1);
-        response.body.name.should.equal('palette 1');
+        response.body.name.should.equal('project 1');
         done();
       })
   })
-
 
   it('should throw an error if GET project does not exist', (done) => {
     chai.request(server)
@@ -154,9 +153,9 @@ describe('Palettes', () => {
 
   it('should get a single palette', (done) => {
     chai.request(server)
-      .get('./api/v1/palettes/1')
+      .get('/api/v1/palettes/1')
       .end((error, response) => {
-        // response.should.be.json;
+        response.should.be.json;
         response.should.have.status(200);
         response.should.be.an('object');
         response.body.should.have.property('id');
@@ -252,19 +251,27 @@ describe('Palettes', () => {
   })
 
   it('should delete a palette', (done) => {
-// unable to fetch due to incrementing id
-  })
-
-  it('should throw an error if DELETE palette does not exist', (done) => {
     chai.request(server)
-      .delete('/api/v1/palettes/999')
+      .delete('/api/v1/palettes/1')
       .end((error, response) => {
         response.should.be.json;
-        response.should.have.status(404);
+        response.should.have.status(200);
         response.should.be.an('object');
-        response.body.error.should.equal("Palette 999 not found.")
+        response.body.result.should.equal('Palette 1 deleted successfully.')
         done();
       })
   })
 
+  it('should throw an error if DELETE palette does not exist', (done) => {
+    chai.request(server)
+    .delete('/api/v1/palettes/999')
+    .end((error, response) => {
+      response.should.be.json;
+      response.should.have.status(404);
+      response.should.be.an('object');
+      response.body.error.should.equal("Palette 999 not found.")
+      done();
+    })
+  })
+  
 })
