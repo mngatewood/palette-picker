@@ -109,13 +109,14 @@ const createPaletteObject = () => {
 const postProject = async (name) => {
   try {
     url = 'http://localhost:3000/api/v1/projects/';
-    await fetch(url, {
+    const postFetch = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( {name} )
     });
+    console.log(postFetch.status)
   } catch (error) {
     throw Error("Error saving project: " + error.message);
   }
