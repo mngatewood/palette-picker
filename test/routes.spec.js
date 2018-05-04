@@ -9,8 +9,17 @@ chai.use(chaiHttp);
 
 describe('Projects', () => {
 
-  beforeEach(() => {
-    return database.seed.run();
+  beforeEach((done) => {
+    database.migrate.rollback()
+      .then( () => {
+        database.migrate.latest()
+        .then ( () => {
+          return database.seed.run()
+            .then( () => {
+              done();
+            })
+        })
+    })
   })
 
   it('should GET all projects', (done) => {
@@ -89,8 +98,17 @@ describe('Projects', () => {
 
 describe('Palettes', () => {
 
-  beforeEach(() => {
-    return database.seed.run();
+  beforeEach((done) => {
+    database.migrate.rollback()
+      .then(() => {
+        database.migrate.latest()
+          .then(() => {
+            return database.seed.run()
+              .then(() => {
+                done();
+              })
+          })
+      })
   })
 
   it('should GET all palettes', (done) => {
