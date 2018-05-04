@@ -26,7 +26,7 @@ app.get('/api/v1/projects', (request, response) => {
 app.get('/api/v1/projects/:id', (request, response) => {
   database('projects').where('id', request.params.id).select()
     .then((projects) => {
-      if (projects.length) {
+      if (projects.length) { 
         response.status(200).json(projects[0])
       } else {
         response.status(404).json({
@@ -67,7 +67,6 @@ app.post('/api/v1/projects', (request, response) => {
 
 // PALETTES
 
-// retrieve all palettes from the database
 app.get('/api/v1/palettes', (request, response) => {
   database('palettes').select()
     .then((palettes) => {
@@ -78,9 +77,7 @@ app.get('/api/v1/palettes', (request, response) => {
     })
 })
 
-// retrieve a single palette from the database
 app.get('/api/v1/palettes/:id', (request, response) => {
-  //SELECT * FROM palettes WHERE id=request.params.id
   database('palettes').where('id', request.params.id).select()
     .then((palettes) => {
       if (palettes.length) {
@@ -95,7 +92,6 @@ app.get('/api/v1/palettes/:id', (request, response) => {
       response.status(500).json(error)
     })
 })
-
 
 app.post('/api/v1/palettes', (request, response) => {
   const { name, color_1, color_2, color_3, color_4, color_5, project_id } = request.body;
@@ -122,7 +118,6 @@ app.post('/api/v1/palettes', (request, response) => {
       })
   }
 });
-
 
 app.delete('/api/v1/palettes/:id', (request, response) => {
   const { id } = request.params;

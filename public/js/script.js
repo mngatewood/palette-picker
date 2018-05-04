@@ -236,8 +236,6 @@ $('body').on('click', '.delete-palette-button', (event) => {
 $('body').on('click', '.project-palette-container', async (event) => {
   const parent = $(event.target).parent();
   const id = parent[0].id.split('-').pop();
-  console.log(id);
   const palette = await fetchPalette(id);
-  console.log(palette)
   loadPalette(palette);
 })
