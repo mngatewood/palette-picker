@@ -29,8 +29,14 @@ app.get('/api/v1/projects', (request, response) => {
 app.get('/api/v1/projects/:id', (request, response) => {
   //SELECT * FROM projects WHERE id=request.params.id
   database('projects').where('id', request.params.id).select()
-    .then((project) => {
-      response.status(200).json(project[0])
+    .then((projects) => {
+      if (projects.length) {
+        response.status(200).json(projects[0])
+      } else {
+        response.status(404).json({
+          error: `Could not find project id "${request.params.id}`
+        })
+      }
     })
     .catch((error) => {
       response.status(500).json(error)
@@ -75,6 +81,25 @@ app.get('/api/v1/palettes', (request, response) => {
       response.status(500).json(error)
     })
 })
+
+// retrieve a single palette from the database
+app.get('/api/v1/palettes/:id', (request, response) => {
+  //SELECT * FROM palettes WHERE id=request.params.id
+  database('palettes').where('id', request.params.id).select()
+    .then((palettes) => {
+      if (palettes.length) {
+        response.status(200).json(palettes[0])
+      } else {
+        response.status(404).json({
+          error: `Could not find palette id "${request.params.id}`
+        })
+      }
+    })
+    .catch((error) => {
+      response.status(500).json(error)
+    })
+})
+
 
 app.post('/api/v1/palettes', (request, response) => {
   const { name, color_1, color_2, color_3, color_4, color_5, project_id } = request.body;
