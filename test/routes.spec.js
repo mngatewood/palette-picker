@@ -31,6 +31,10 @@ describe('Projects', () => {
       })
   })
 
+  it('should get a single project', (done) => {
+// unable to fetch due to incrementing id
+  })
+
   it('should throw an error if GET project does not exist', (done) => {
     chai.request(server)
       .get('/api/v1/projects/999')
@@ -115,6 +119,10 @@ describe('Palettes', () => {
       })
   })
 
+  it('should get a single palette', (done) => {
+// unable to fetch due to incrementing id
+  })
+
   it('should throw an error if GET palette does not exist', (done) => {
     chai.request(server)
       .get('/api/v1/palettes/999')
@@ -137,38 +145,69 @@ describe('Palettes', () => {
         color_3: '#888888',
         color_4: '#999999',
         color_5: '#000000',
-        project_id: 299
+        project_id: 1
       })
       .end((error, response) => {
         response.should.be.json;
-        response.should.have.status(201);
+        response.should.have.status(201);  // unable to fetch due to incrementing id
         response.should.be.an('object');
-        response.body.should.have.property('id');
+        response.body.should.have.property('id');  // unable to fetch due to incrementing id
         done();
       })
   })
 
   it('should throw an error if POST does not include name property', (done) => {
     chai.request(server)
-      .post('/api/v1/projects/')
+      .post('/api/v1/palettes/')
+      .send({
+        color_1: '#666666',
+        color_2: '#777777',
+        color_3: '#888888',
+        color_4: '#999999',
+        color_5: '#000000',
+        project_id: 1
+      })
       .end((error, response) => {
         response.should.be.json;
         response.should.have.status(422);
         response.should.be.an('object');
-        response.body.error.should.equal("Please enter a project name.")
+        response.body.error.should.equal("Error: Please enter a palette name.")
         done();
       })
   })
 
-  it('should throw an error if POST includes duplicate project name', (done) => {
+  it('should throw an error if POST does not include project_id property', (done) => {
     chai.request(server)
-      .post('/api/v1/projects/')
-      .send({ name: 'project 1' })
+      .post('/api/v1/palettes/')
+      .send({
+        name: 'palette 5',
+        color_1: '#666666',
+        color_2: '#777777',
+        color_3: '#888888',
+        color_4: '#999999',
+        color_5: '#000000'
+      })
       .end((error, response) => {
         response.should.be.json;
-        response.should.have.status(409);
+        response.should.have.status(400);
         response.should.be.an('object');
-        response.body.error.should.equal("Error: Please enter a unique project name.")
+        response.body.error.should.equal("Error: Please select a project to save this palette.")
+        done();
+      })
+  })
+
+  it('should delete a palette', (done) => {
+// unable to fetch due to incrementing id
+  })
+
+  it('should throw an error if DELETE palette does not exist', (done) => {
+    chai.request(server)
+      .delete('/api/v1/palettes/999')
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(404);
+        response.should.be.an('object');
+        response.body.error.should.equal("Palette 999 not found.")
         done();
       })
   })
