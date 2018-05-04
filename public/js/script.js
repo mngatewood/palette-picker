@@ -109,15 +109,24 @@ const createPaletteObject = () => {
 const postProject = async (name) => {
   try {
     url = 'http://localhost:3000/api/v1/projects/';
-    const postFetch = await fetch(url, {
+    await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( {name} )
-    });
-    console.log(postFetch.status)
+    })
+    .then(response => {
+      if(response.status === 422) {
+        alert('No project name was entered. Please enter a project name.')
+      } else if (response.status === 409) {
+        alert(`Project name "${name}" already exists.  Please enter a unique project name.`)
+      } else {
+        alert(`Project "${name}" successfully created.`)
+      }
+    })
   } catch (error) {
+    console.log(error)
     throw Error("Error saving project: " + error.message);
   }
 }
