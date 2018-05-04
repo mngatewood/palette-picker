@@ -40,7 +40,7 @@ const loadPalette = (palette) => {
 }
 
 const fetchProjects = async () => {
-  url = 'http://localhost:3000/api/v1/projects/';
+  url = '/api/v1/projects/';
   try {
     const response = await fetch(url);
     const projects = await response.json();
@@ -51,7 +51,7 @@ const fetchProjects = async () => {
 }
 
 const fetchPalettes = async () => {
-  url = 'http://localhost:3000/api/v1/palettes/';
+  url = '/api/v1/palettes/';
   try {
     const response = await fetch(url);
     const palettes = await response.json();
@@ -62,7 +62,7 @@ const fetchPalettes = async () => {
 }
 
 const fetchPalette = async (id) => {
-  url = `http://localhost:3000/api/v1/palettes/${id}`;
+  url = `/api/v1/palettes/${id}`;
   try {
     const response = await fetch(url);
     const palette = await response.json();
@@ -131,7 +131,7 @@ const createPaletteObject = () => {
 
 const postProject = async (name) => {
   try {
-    url = 'http://localhost:3000/api/v1/projects/';
+    url = '/api/v1/projects/';
     await fetch(url, {
       method: 'POST',
       headers: {
@@ -159,7 +159,7 @@ const postProject = async (name) => {
 
 const postPalette = async (palette) => {
   try {
-    url = 'http://localhost:3000/api/v1/palettes/';
+    url = '/api/v1/palettes/';
     await fetch(url, {
       method: 'POST',
       headers: {
