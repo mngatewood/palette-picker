@@ -126,8 +126,7 @@ const postProject = async (name) => {
       }
     })
   } catch (error) {
-    console.log(error)
-    throw Error("Error saving project: " + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
@@ -140,9 +139,21 @@ const postPalette = async (palette) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(palette)
+    })
+    .then(response => {
+      if(response.status === 400) {
+        alert('Error: Please select a project to save this palette.');
+      } else if (response.status === 422) {
+        alert('Error: Please enter a palette name.');
+      } else if (response.status === 500) {
+        alert('Sorry.  Something went wrong.  Please try again.');
+      } else {
+        console.log(palette)
+        // alert(`Project "${palette.name}" successfully created.`)
+      }
     });
   } catch (error) {
-    throw Error("Error saving palette: " + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
