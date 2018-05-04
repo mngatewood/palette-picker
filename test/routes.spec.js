@@ -32,17 +32,31 @@ describe('Projects', () => {
         response.body.length.should.equal(2);
         response.body[0].should.have.property('id');
         response.body[0].should.have.property('name');
+        response.body[0].id.should.equal(1)
         response.body[0].name.should.equal('project 1');
         response.body[1].should.have.property('id');
         response.body[1].should.have.property('name');
+        response.body[1].id.should.equal(2);
         response.body[1].name.should.equal('project 2');
         done();
       })
   })
 
-  it('should get a single project', (done) => {
-// unable to fetch due to incrementing id
+  it.only('should get a single project', (done) => {
+    chai.request(server)
+      .get('./api/v1/projects/1')
+      .end((error, response) => {
+        response.should.be.json;
+        response.should.have.status(200);
+        response.should.be.an('object');
+        response.body.should.have.property('id');
+        response.body.should.have.property('name');
+        response.body.id.should.equal(1);
+        response.body.name.should.equal('palette 1');
+        done();
+      })
   })
+
 
   it('should throw an error if GET project does not exist', (done) => {
     chai.request(server)
@@ -133,12 +147,35 @@ describe('Palettes', () => {
         response.body[0].color_3.should.equal('#333333');
         response.body[0].color_4.should.equal('#444444');
         response.body[0].color_5.should.equal('#555555');
+        response.body[0].project_id.should.equal(1);
         done();
       })
   })
 
   it('should get a single palette', (done) => {
-// unable to fetch due to incrementing id
+    chai.request(server)
+      .get('./api/v1/palettes/1')
+      .end((error, response) => {
+        // response.should.be.json;
+        response.should.have.status(200);
+        response.should.be.an('object');
+        response.body.should.have.property('id');
+        response.body.should.have.property('name');
+        response.body.should.have.property('color_1');
+        response.body.should.have.property('color_2');
+        response.body.should.have.property('color_3');
+        response.body.should.have.property('color_4');
+        response.body.should.have.property('color_5');
+        response.body.should.have.property('project_id');
+        response.body.name.should.equal('palette 1');
+        response.body.color_1.should.equal('#111111');
+        response.body.color_2.should.equal('#222222');
+        response.body.color_3.should.equal('#333333');
+        response.body.color_4.should.equal('#444444');
+        response.body.color_5.should.equal('#555555');
+        response.body.project_id.should.equal(1);
+        done();
+      })
   })
 
   it('should throw an error if GET palette does not exist', (done) => {
