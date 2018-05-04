@@ -6,12 +6,12 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return Promise.all([
         knex('projects').insert({
-          name: 'Project 1'
+          name: 'project 1'
         }, 'id')
           .then(project => {
             return knex('palettes').insert([
               {
-                name: 'Palette 1',
+                name: 'palette 1',
                 color_1: "#111111",
                 color_2: '#222222',
                 color_3: '#333333',
@@ -20,7 +20,7 @@ exports.seed = function (knex, Promise) {
                 project_id: project[0]
               },
               {
-                name: 'Palette 2',
+                name: 'palette 2',
                 color_1: '#555555',
                 color_2: '#666666',
                 color_3: '#777777',
@@ -37,12 +37,12 @@ exports.seed = function (knex, Promise) {
     .then(() => {
       return Promise.all([
         knex('projects').insert({
-          name: 'Project 2'
+          name: 'project 2'
         }, 'id')
           .then(project => {
             return knex('palettes').insert([
               {
-                name: 'Palette 3',
+                name: 'palette 3',
                 color_1: '#121212',
                 color_2: '#232323',
                 color_3: '#343434',
@@ -51,7 +51,7 @@ exports.seed = function (knex, Promise) {
                 project_id: project[0]
               },
               {
-                name: 'Palette 4',
+                name: 'palette 4',
                 color_1: '#676767',
                 color_2: '#787878',
                 color_3: '#898989',
