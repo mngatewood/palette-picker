@@ -27,6 +27,18 @@ const refreshPalette = () => {
   }
 }
 
+const loadPalette = (palette) => {
+  const keys = Object.keys(palette);
+  $.each(keys, (index, key) => {
+    if (key.substring(0, 5) === 'color') {
+      let number = key.charAt(6);
+      console.log(key.substring(0, 5), number, palette[key]);
+      $(`#header-palette-${number}`).css('background-color', palette[key]);
+      $(`#header-palette-${number} span`).text(palette[key]);
+    }
+  }); 
+}
+
 const fetchProjects = async () => {
   url = 'http://localhost:3000/api/v1/projects/';
   try {
@@ -34,7 +46,7 @@ const fetchProjects = async () => {
     const projects = await response.json();
     return projects;
   } catch (error) {
-    throw Error("Error retrieving projects: " + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
@@ -45,7 +57,18 @@ const fetchPalettes = async () => {
     const palettes = await response.json();
     return palettes;
   } catch (error) {
-    throw Error("Error retrieving palettes: " + error.message);
+    alert('Error: ' + error.message);
+  }
+}
+
+const fetchPalette = async (id) => {
+  url = `http://localhost:3000/api/v1/palettes/${id}`;
+  try {
+    const response = await fetch(url);
+    const palette = await response.json();
+    return palette;
+  } catch {
+    alert('Error: ' + error.message);
   }
 }
 
@@ -208,4 +231,13 @@ $('#create-project-submit').click( async (event) => {
 
 $('body').on('click', '.delete-palette-button', (event) => {
   deletePalette(event.target.id);
+})
+
+$('body').on('click', '.project-palette-container', async (event) => {
+  const parent = $(event.target).parent();
+  const id = parent[0].id.split('-').pop();
+  console.log(id);
+  const palette = await fetchPalette(id);
+  console.log(palette)
+  loadPalette(palette);
 })
