@@ -148,7 +148,7 @@ const postProject = async (name) => {
           alert('No project name was entered. Please enter a project name.') 
           }; break;
         default: { 
-          alert(`Project "${name}" successfully created.`) 
+          console.log('Success!') 
         };
       }
     })
@@ -179,7 +179,7 @@ const postPalette = async (palette) => {
           alert('Sorry.  Something went wrong. Please try again.') 
           }; break;
         default: { 
-          alert(`Project "${palette.name}" successfully saved to project.`) 
+          console.log('Success!') 
         };
       }
     });
