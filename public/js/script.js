@@ -96,7 +96,7 @@ const addProjectOptions = (projects) => {
 }
 
 const createPaletteObject = () => {
-  const name = $('#save-palette-name').val();
+  const name = $('#save-palette-name').val().toLowerCase();
   const color_1 = $('#header-palette-1 span').text();
   const color_2 = $('#header-palette-2 span').text();
   const color_3 = $('#header-palette-3 span').text();
@@ -171,7 +171,7 @@ $('#save-palette-submit').click( async (event) => {
 
 $('#create-project-submit').click( async (event) => {
   event.preventDefault();
-  const project = $('#create-project-name').val();
+  const project = $('#create-project-name').val().toLowerCase();
   await postProject(project);
   renderProjectContainer();
   clearInputFields();
