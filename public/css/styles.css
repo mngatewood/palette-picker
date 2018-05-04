@@ -234,12 +234,12 @@ button.selected {
 
 #main-dashboard-bottom {
   height: 20px;
-  background: linear-gradient(#303030, #C0C0C0);
+  background: linear-gradient(#303030, #8B0000);
 }
 
 footer {
   flex: 1;
-  background: linear-gradient(#C0C0C0, #303030);
+  background: linear-gradient(#8B0000, #303030);
   color: white;
   min-height: 90px;
   padding: 5px 15px;
@@ -251,11 +251,11 @@ footer {
   position: relative;
   top: -5px;
   padding: 0 0 10px 14px;
-  height: 80%;
+  height: 90%;
   border: 5px solid #F5F5F5;
   border-radius: 10px;
-  border-style: groove;
-  background-color: #C0C0C0;
+  border-style: outset;
+  background-color: rgba(255, 255, 255, 0.7);
   overflow: scroll;
   text-transform: uppercase;
 }
@@ -267,11 +267,12 @@ article {
 article h2 {
   width: 300px;
   margin: 10px 0 5px 0;
-  color: #000000;
-  font-family: 'Open Sans', sans-serif;
+  color: #8B0000;
+  font-family: 'Verdana', sans-serif;
   font-size: 20px;
   font-weight: 700;
   text-decoration: underline;
+  text-shadow: 1px 1px #F5F5F5;
 }
 
 .project-palette-container {
