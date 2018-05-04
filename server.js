@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-// console.log(process.env);
-
-// app.use(urlLogger, timeLogger);
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -14,7 +11,6 @@ const database = require('knex')(configuration);
 
 // PROJECTS
 
-// retrieve all projects from the database
 app.get('/api/v1/projects', (request, response) => {
   database('projects').select()
     .then((projects) => {
@@ -25,9 +21,7 @@ app.get('/api/v1/projects', (request, response) => {
     })
 })
 
-// retrieve a single project from the database
 app.get('/api/v1/projects/:id', (request, response) => {
-  //SELECT * FROM projects WHERE id=request.params.id
   database('projects').where('id', request.params.id).select()
     .then((projects) => {
       if (projects.length) {
