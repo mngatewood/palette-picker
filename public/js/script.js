@@ -96,7 +96,7 @@ const addProjectOptions = (projects) => {
 }
 
 const createPaletteObject = () => {
-  const name = $('#save-palette-name').val();
+  const name = $('#save-palette-name').val().toLowerCase();
   const color_1 = $('#header-palette-1 span').text();
   const color_2 = $('#header-palette-2 span').text();
   const color_3 = $('#header-palette-3 span').text();
@@ -115,8 +115,18 @@ const postProject = async (name) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify( {name} )
-    });
+    })
+    .then(response => {
+      if(response.status === 422) {
+        alert('No project name was entered. Please enter a project name.')
+      } else if (response.status === 409) {
+        alert(`Project name "${name}" already exists.  Please enter a unique project name.`)
+      } else {
+        alert(`Project "${name}" successfully created.`)
+      }
+    })
   } catch (error) {
+    console.log(error)
     throw Error("Error saving project: " + error.message);
   }
 }
@@ -171,7 +181,7 @@ $('#save-palette-submit').click( async (event) => {
 
 $('#create-project-submit').click( async (event) => {
   event.preventDefault();
-  const project = $('#create-project-name').val();
+  const project = $('#create-project-name').val().toLowerCase();
   await postProject(project);
   renderProjectContainer();
   clearInputFields();

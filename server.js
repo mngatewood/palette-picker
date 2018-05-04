@@ -44,14 +44,19 @@ app.post('/api/v1/projects', (request, response) => {
   if(!name) {
     return response
       .status(422)
-      .send({ error: 
-        `Expected format: { name: <String> }. You're missing the "name" property.`
-      });
+      .send({ error: 'Please enter a project name.' });
   }
 
-  database('projects').insert( {name}, 'id')
-    .then(project => {
-      response.status(201).json({ id: project[0]})
+  database('projects').where('name', name).select()
+    .then(result => {
+      if (result.length) { return response.status(409)
+      .send({ error: 'Error: Please enter a unique project name.'})
+      } else {
+        database('projects').insert({ name }, 'id')
+          .then(project => {
+            response.status(201).json({ id: project[0] })
+          })
+      }
     })
     .catch(error => {
       response.status(500).json({ error });
