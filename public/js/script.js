@@ -117,17 +117,20 @@ const postProject = async (name) => {
       body: JSON.stringify( {name} )
     })
     .then(response => {
-      if(response.status === 422) {
-        alert('No project name was entered. Please enter a project name.')
-      } else if (response.status === 409) {
-        alert(`Project name "${name}" already exists.  Please enter a unique project name.`)
-      } else {
-        alert(`Project "${name}" successfully created.`)
+      switch(response.status) {
+        case 409: { 
+          alert(`Project name "${name}" already exists. Please enter a unique project name.`) 
+          }; break;
+        case 422: { 
+          alert('No project name was entered. Please enter a project name.') 
+          }; break;
+        default: { 
+          alert(`Project "${name}" successfully created.`) 
+        };
       }
     })
   } catch (error) {
-    console.log(error)
-    throw Error("Error saving project: " + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
@@ -140,9 +143,25 @@ const postPalette = async (palette) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(palette)
+    })
+    .then(response => {
+      switch(response.status) {
+        case 400: { 
+          alert('Error: Please select a project to save this palette.') 
+          }; break;
+        case 422: { 
+          alert('Error: Please enter a palette name.') 
+          }; break;
+        case 500: { 
+          alert('Sorry.  Something went wrong. Please try again.') 
+          }; break;
+        default: { 
+          alert(`Project "${palette.name}" successfully saved to project.`) 
+        };
+      }
     });
   } catch (error) {
-    throw Error("Error saving palette: " + error.message);
+    alert('Error: ' + error.message);
   }
 }
 
