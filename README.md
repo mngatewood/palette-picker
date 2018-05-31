@@ -26,15 +26,15 @@ Palette Picker will build and run on localhost:3000.
 
 Run the production build [here](https://palette-picker-heroku.herokuapp.com/)
 
+## Using Palette Picker
+
+When the spin button is clicked, the application will display five random colors on the screen.  Clicking the lock button beneath the individual colors will "lock-in" that color and prevent it from changing when the spin button is subsequently clicked.  When the user is satisfied with the selection of colors, they may create a project folder in which to save their chosen palette.  To create a project, enter a name in the field titled "Enter Project Name" and click the "Create Project" button.  To save a palette, enter a name in the field titled "Enter Palette Name", select a saved project in which to save the palette, and click the "Save Palette" button.  Projects and palettes will be displayed at the bottom of the screen.
+
 ## Testing Palette Picker
 
 1. Navigate to the palette-picker directory in your terminal. 
 
 2. Run `npm test` from your terminal. 
-
-## Using Palette Picker
-
-When the spin button is clicked, the application will display five random colors on the screen.  Clicking the lock button beneath the individual colors will "lock-in" that color and prevent it from changing when the spin button is subsequently clicked.  When the user is satisfied with the selection of colors, they may create a project folder in which to save their chosen palette.  To create a project, enter a name in the field titled "Enter Project Name" and click the "Create Project" button.  To save a palette, enter a name in the field titled "Enter Palette Name", select a saved project in which to save the palette, and click the "Save Palette" button.  Projects and palettes will be displayed at the bottom of the screen.
 
 ## Built With
 
