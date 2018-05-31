@@ -2,7 +2,7 @@
 
 # Palette Picker
 
-![Screenshot]()
+![Screenshot](https://raw.githubusercontent.com/mngatewood/palette-picker/master/public/readme/Screen%20Shot%202018-05-31%20at%209.13.29%20AM.png)
 
 ## Synopsis
 
